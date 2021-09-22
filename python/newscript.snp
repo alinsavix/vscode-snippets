@@ -1,0 +1,25 @@
+import argparse
+import logging as lg
+import os
+import sys
+
+from typing import Dict, List, Tuple
+
+def main(argv: List[str]) -> int:
+    # args = parse_arguments(argv)
+    #
+    # loglevel = "DEBUG" if args.debug else "INFO"
+    loglevel = "INFO"
+    LOG_FORMAT = "[%(filename)s:%(lineno)s:%(funcName)s] (%(name)s) %(message)s"
+    lg.basicConfig(level=loglevel, format=LOG_FORMAT)
+
+    log = lg.getLogger()
+
+    # do stuff
+
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main(sys.argv))
+

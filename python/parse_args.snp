@@ -1,0 +1,63 @@
+---
+scope: python
+description: sekelton parse_arguments function
+---
+class NegateAction(argparse.Action):
+    def __call__(self, parser, ns, values, option):
+        setattr(ns, self.dest, option[2:4] != 'no')
+
+def parse_arguments(argv):
+    parser = argparse.ArgumentParser(
+        prog='unknown.py',  # Fix me
+        description='My program description, it does neat things',
+    )
+
+    parser.add_argument(
+        "--debug",
+        action='store_const',
+        const=True,
+        default=False,
+        # help="Enable debugging",
+    )
+
+    # filename argument
+    # parser.add_argument(
+    #     "-o",
+    #     "--out",
+    #     type=str,
+    #     # default="some.file.txt",
+    #     default=None,
+    #
+    #     help="file to output something to",
+    # )
+
+    # integer argument
+    # parser.add_argument(
+    #     "-sa",
+    #     "--samples",
+    #     default=16,
+    #     type=int,
+    #     help="number of samples to use when rendering",
+    # )
+
+    # --something boolean w/ --no-something available too
+    # parser.add_argument(
+    #     "--denoise",
+    #     "--no-denoise",
+    #     dest="denoise",
+    #     default=True,
+    #     action=NegateAction,
+    #     nargs=0,
+    # )
+
+    # positional argument
+    parser.add_argument(
+        "file",
+        help="blender file to render",
+        type=valid_file,
+    )
+
+    parsed_args = parser.parse_args(argv)
+
+    return parsed_args
+
